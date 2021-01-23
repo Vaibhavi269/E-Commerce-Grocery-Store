@@ -1,0 +1,15 @@
+﻿@{ ViewData["Title"] = "Confirm Order"; }
+
+<h4>Order Conformation</h4>
+<hr />
+<div class="alert alert-success">
+    @if (ViewBag.message != null)
+    {
+    <div> @ViewBag.message.ToString() </div>
+    }
+</div>
+<div>
+    <a href="/" class="btn btn-primary">
+            <i class="fa fa-arrow-circle-left fa-fw"></i> Continue Shopping
+     </a>
+</div>

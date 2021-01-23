@@ -1,0 +1,71 @@
+﻿<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+        <a class="navbar-brand" href="/">Grocery Store</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a href="/" class="nav-link">Home</a>
+                </li>
+                @*<li class="nav-item">*@
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Groceries</a>
+                    <div class="dropdown-menu">
+                        @await Component.InvokeAsync("CategoryList")
+                    </div>
+                </li>
+                @*<a asp-controller="Shop" asp-action="List" class="nav-link">Groceries</a>*@
+                @*</li>*@
+
+                @if (User.Identity.IsAuthenticated)
+                {
+            @if (!User.IsInRole("admin"))
+            {
+            <li class="nav-item">
+                <a asp-controller="Cart" asp-action="Index" class="nav-link">Cart</a>
+            </li>}
+                            <li class="nav-item">
+                                <a asp-controller="Order" asp-action="Index" class="nav-link">Orders</a>
+                            </li>
+                                            @if (User.IsInRole("admin"))
+                                            {
+                            <li class="nav-item">
+                                <a asp-controller="Admin" asp-action="CreateProduct" class="nav-link">Add Product</a>
+                            </li>
+                                                <li class="nav-item">
+                                                    <a asp-controller="Admin" asp-action="ProductList" class="nav-link">Admin Products</a>
+                                                </li>
+                                                                    <li class="nav-item">
+                                                                        <a asp-controller="Admin" asp-action="CreateCategory" class="nav-link">Add Category</a>
+                                                                    </li>
+                                                                                        <li class="nav-item">
+                                                                                            <a asp-controller="Admin" asp-action="CategoryList" class="nav-link">Admin Categories</a>
+                                                                                        </li>}}
+            </ul>
+
+            <ul class="navbar-nav ml-auto">
+
+                @if (User.Identity.IsAuthenticated)
+                {
+    <li class="nav-item">
+        <a href="#" class="nav-link">
+            @User.Identity.Name
+        </a>
+    </li>
+                    <li class="nav-item">
+                        <a asp-controller="Account" asp-action="Logout" class="nav-link">Logout</a>
+                    </li> }
+                                else
+                                {
+                    <li class="nav-item">
+                        <a asp-controller="Account" asp-action="Login" class="nav-link">Login</a>
+                    </li>
+                                    <li class="nav-item">
+                                        <a asp-controller="Account" asp-action="Register" class="nav-link">Register</a>
+                                    </li>}
+            </ul>
+        </div>
+    </div>
+</nav>

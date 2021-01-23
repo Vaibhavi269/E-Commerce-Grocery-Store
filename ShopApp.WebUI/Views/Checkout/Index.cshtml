@@ -1,0 +1,139 @@
+﻿@model IEnumerable<AddressModel>
+@{ ViewData["Title"] = "Index";
+    var check = false;
+   }
+
+
+<div class="row mt-0">
+    <div class="col-md-6">
+        <div class="text-left">
+            <h4>Billing Address</h4>
+            @if (Model.Any(i => i.AddressType == AddressType.BillingAddress))
+            {
+                var ba = Model.First(i => i.AddressType == AddressType.BillingAddress);
+        <table class="table">
+            <tbody>
+                <tr>
+                    <th>Full Name</th>
+                    <td>@ba.FullName</td>
+                </tr>
+                <tr>
+                    <th>Address1</th>
+                    <td>@ba.Address1</td>
+                </tr>
+                <tr>
+                    <th>City</th>
+                    <td>@ba.City</td>
+                </tr>
+                <tr>
+                    <th>State</th>
+                    <td>@ba.State</td>
+                </tr>
+                <tr>
+                    <th>Country</th>
+                    <td>@ba.Country</td>
+                </tr>
+                <tr>
+                    <th>Postal Code</th>
+                    <td>@ba.PostalCode</td>
+                </tr>
+                <tr>
+                    <th>Phone</th>
+                    <td>@ba.Phone</td>
+                </tr>
+                <tr>
+                    <th>Email</th>
+                    <td>@ba.Email</td>
+                </tr>
+                <tr>
+                    <td>
+                        <a asp-action="EditAddress" asp-controller="Home"  asp-route-id="@ba.Id" class="btn btn-warning">
+                            <i class="fa fa-edit fa-fw"></i> Update Billing Address
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+                }
+                else
+                {
+                    check = true;
+                <div class="alert alert-warning">
+                No Billing Address Available!
+            </div>
+             var ad = new AddressModel() { AddressType = AddressType.BillingAddress, UserId = ViewBag.userId };
+            <partial name="_address" model="@ad" />}
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="text-left">
+            <h4>Shipping Address</h4>
+            @if (Model.Any(i => i.AddressType == AddressType.ShippingAddress))
+            {
+                var ba = Model.First(i => i.AddressType == AddressType.ShippingAddress);
+        <table class="table">
+            <tbody>
+                <tr>
+                    <th>Full Name</th>
+                    <td>@ba.FullName</td>
+                </tr>
+                <tr>
+                    <th>Address1</th>
+                    <td>@ba.Address1</td>
+                </tr>
+                <tr>
+                    <th>City</th>
+                    <td>@ba.City</td>
+                </tr>
+                <tr>
+                    <th>State</th>
+                    <td>@ba.State</td>
+                </tr>
+                <tr>
+                    <th>Country</th>
+                    <td>@ba.Country</td>
+                </tr>
+                <tr>
+                    <th>Postal Code</th>
+                    <td>@ba.PostalCode</td>
+                </tr>
+                <tr>
+                    <th>Phone</th>
+                    <td>@ba.Phone</td>
+                </tr>
+                <tr>
+                    <th>Email</th>
+                    <td>@ba.Email</td>
+                </tr>
+                <tr>
+                    <td>
+                        <a asp-action="EditAddress" asp-controller="Home"  asp-route-id="@ba.Id"  class="btn btn-warning">
+                            <i class="fa fa-edit fa-fw"></i> Update Shipping Address
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>}
+            else
+            {
+                check = true;
+        <div class="alert alert-warning">
+            No Shipping Address Available!
+        </div> var ac = new AddressModel() { AddressType = AddressType.ShippingAddress, UserId = ViewBag.userId };
+        <partial name="_address" model="@ac" />}
+        </div>
+          
+        <hr/>
+        @if (!check)
+        {
+    <div class="text-center">
+        <a href="/" class="btn btn-primary">
+            <i class="fa fa-arrow-circle-left fa-fw"></i> Continue Shopping
+        </a>
+        <a asp-action="Payment" asp-controller="Checkout" class="btn btn-primary">
+            Payment <i class="fa fa-arrow-circle-right fa-fw"></i>
+        </a>
+    </div>
+        }
+    </div>
+</div>

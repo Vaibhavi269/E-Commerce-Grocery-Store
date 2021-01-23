@@ -1,0 +1,42 @@
+﻿
+@model Order
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h4>Edit Order</h4>
+<hr/>
+<div>
+    <form asp-controller="Order" asp-action="Edit" method="post">
+        <div class="form-group row">
+            <label class="col-md-2 col-form-label">Order Id</label>
+            <div class="col-md-6">
+                <input asp-for="Id" disabled value="@Model.Id" class="form-control" />
+            </div>
+        </div>
+        <div class="form-group row">
+            <label asp-for="OrderStatus" class="col-md-2 col-form-label"></label>
+            <div class="col-md-6">
+
+           <select asp-for="OrderStatus" asp-items="Html.GetEnumSelectList<OrderStatus>()" class="form-control" ></select>
+                @*<input asp-for="OrderStatus" value="@Model.OrderStatus" class="form-control" />*@
+                <span asp-validation-for="OrderStatus" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label asp-for="DeliveryStatus" class="col-md-2 col-form-label"></label>
+            <div class="col-md-6">
+                <select asp-for="DeliveryStatus" asp-items="Html.GetEnumSelectList<Delivery>()" class="form-control"></select>
+                @*<input asp-for="DeliveryStatus" value="@Model.DeliveryStatus" class="form-control" />*@
+                <span asp-validation-for="DeliveryStatus" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-md-10 offset-md-2">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </div>
+
+    </form>
+</div>
